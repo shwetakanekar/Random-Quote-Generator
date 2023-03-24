@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [quotes, setQuotes] = useState([{ text: '', author: '' }]);
+  const [quoteId, setQuoteId] = useState(0);
 
   useEffect(() => {
     getQuotes();
@@ -21,26 +22,36 @@ function App() {
       });
   };
 
+  const handleNewQuote = () => {
+    let newId = Math.floor(Math.random() * quotes.length);
+    console.log(newId);
+    setQuoteId(newId);
+  };
+
   return (
     <div id="container">
       <div id="quote-box">
         <div id="text">
           <span>
-            <i class="fa fa-solid fa-quote-left"></i>
+            <i className="fa fa-solid fa-quote-left"></i>
           </span>
-          {quotes[0].text}
+          {quotes[quoteId].text}
         </div>
-        <div id="author">- {quotes[0].author}</div>
+        <div id="author">
+          - {quotes[quoteId].author ? quotes[quoteId].author : 'Anonymous'}
+        </div>
         <div id="footer">
           <a
             id="tweet-quote"
-            href={`https://twitter.com/intent/tweet?text="${quotes[0].text}"`}
+            href={`https://twitter.com/intent/tweet?text="${quotes[quoteId].text}"`}
           >
             <span>
-              <i class="fa fa-brands fa-twitter"></i>
+              <i className="fa fa-brands fa-twitter"></i>
             </span>
           </a>
-          <button id="new-quote">New quote</button>
+          <button id="new-quote" onClick={handleNewQuote}>
+            New quote
+          </button>
         </div>
       </div>
     </div>

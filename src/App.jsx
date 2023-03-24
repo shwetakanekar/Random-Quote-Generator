@@ -15,16 +15,15 @@ function App() {
       .get('https://type.fit/api/quotes')
       .then((response) => {
         setQuotes(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log('Error: ', error);
+        alert('An error occured while getting the quotes.');
       });
   };
 
   const handleNewQuote = () => {
     let newId = Math.floor(Math.random() * quotes.length);
-    console.log(newId);
     setQuoteId(newId);
   };
 
